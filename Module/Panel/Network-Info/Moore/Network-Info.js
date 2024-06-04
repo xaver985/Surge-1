@@ -195,7 +195,7 @@ function getIP() {
  */
 function getNetworkInfo(retryTimes = 5, retryInterval = 1000) {
   // 发送网络请求
-  httpMethod.get('http://ip-api.com/json').then(response => {
+  httpMethod.get('https://api.ip.sb/geoip').then(response => {
     if (Number(response.status) > 300) {
       throw new Error(`Request error with http status code: ${response.status}\n${response.data}`);
     }
@@ -204,7 +204,7 @@ function getNetworkInfo(retryTimes = 5, retryInterval = 1000) {
       title: getSSID() ?? getCellularInfo(),
       content:
         getIP() +
-        `节点IP：${info.query}\n` +
+        `节点IP：${info.ip}\n` +
         `节点ISP：${info.isp}\n` +
         `节点位置：${getFlagEmoji(info.countryCode)} | ${info.country} - ${info.city}`,
       icon: getSSID() ? 'wifi' : 'simcard',
